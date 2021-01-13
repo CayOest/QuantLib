@@ -103,6 +103,9 @@ namespace QuantLib {
         EndCriteria::Type ecType = EndCriteria::None;
         P.reset();
         Array x_ = P.currentValue();
+        if (!P.constraint().test(x_))
+            QL_FAIL("Initial Guess " << x_ << " should be inside the feasible set.");
+
         Integer iterationNumber_=0;
 
         // Initialize vertices of the simplex
