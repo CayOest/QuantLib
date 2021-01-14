@@ -208,6 +208,8 @@ namespace QuantLib {
         Array l2() const;
         //! return optimization method being used
         ext::shared_ptr<OptimizationMethod> optimizationMethod() const;
+        //! return error code of the optimization
+        EndCriteria::Type errorCode() const;
         //! open discountFunction to public
         DiscountFactor discount(const Array& x, Time t) const;
       protected:
@@ -256,6 +258,8 @@ namespace QuantLib {
         ext::shared_ptr<OptimizationMethod> optimizationMethod_;
         // flat extrapolation of instantaneous forward before / after cutoff
         Real minCutoffTime_, maxCutoffTime_;
+        // error code of the optimization method
+        EndCriteria::Type errorCode_;
     };
 
     // inline
@@ -319,6 +323,10 @@ namespace QuantLib {
     inline ext::shared_ptr<OptimizationMethod> 
     FittedBondDiscountCurve::FittingMethod::optimizationMethod() const {
         return optimizationMethod_;
+    }
+
+    inline EndCriteria::Type FittedBondDiscountCurve::FittingMethod::errorCode() const { 
+        return errorCode_;
     }
 
     inline DiscountFactor FittedBondDiscountCurve::FittingMethod::discount(const Array& x, Time t) const {

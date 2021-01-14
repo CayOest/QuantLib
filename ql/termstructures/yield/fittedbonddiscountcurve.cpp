@@ -228,7 +228,7 @@ namespace QuantLib {
                                 functionEpsilon,
                                 gradientNormEpsilon);
 
-        optimization->minimize(problem,endCriteria);
+        errorCode_ = optimization->minimize(problem,endCriteria);
         solution_ = problem.currentValue();
 
         numberOfIterations_ = problem.functionEvaluation();
